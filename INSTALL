@@ -1,0 +1,81 @@
+INSTALL
+=======
+ To make use of this overlay procedure you will need to modify the VDI broker 
+ web-app.
+ 
+ The broker web-app runs within a Tomcat application server on the VDI 
+ connection server. On a default install this web-app can be found under: 
+ 
+   c -> Program Files -> VMWare -> VMWare View -> Server -> broker -> webapps
+ 
+ The web-app itself is contained in the ROOT.war file.
+ 
+ 
+ NOTE: You will need to copy the ROOT.war file somewhere else to modify and 
+       rebuild it. (ex: users directory) 
+   
+  **** It is highly advisable to save a copy of this UNALTERED war ****
+  **** file somewhere also.                                        ****
+ 
+ Create a place to work: mkdir tmp_portal. Place your copy of ROOT.war in your 
+ tmp_portal directory.
+
+ Expand the ROOT.war file, [jar -xvf ROOT.war]. You will have a tree that looks
+ like this with ROOT.war being the file you extracted.
+ 
+ 
+ tmp_portal 
+  |___ broker
+  |___ favicon.ico
+  |___ help
+  |___ portlets
+  |___ ROOT.war 
+  |___ styles
+  |___ WEB-INF
+ 
+
+ Next add our jar to the web-app. 
+ 
+ 1) copy the jar you created previously into the WEB-INF/lib directory.
+ 
+ 2) define and call our servlet from WEB-INF/web.xml  
+ 
+    o add this block of XML to define the servlet somewhere around line 320
+ 
+   <servlet>
+     <servlet-name>org.extreme.pppoverlay_PortalOverlayServlet</servlet-name>
+     <servlet-class>org.extreme.pppoverlay.PortalOverlayServlet</servlet-class>
+   </servlet> 
+ 
+    o add this block of XML to reference our new servlet somewhere around 
+      line 691
+ 
+   <servlet-mapping>
+     <servlet-name>org.extreme.pppoverlay_PortalOverlayServlet</servlet-name>
+     <url-pattern>/portlets/client/*</url-pattern>
+     <url-pattern>/styles/clientlaunch-default/*</url-pattern>
+   </servlet-mapping>
+ 
+ 3) comment other /portal, /style calls out 
+ 
+    o This is the tricky part but, basically you want to place comment 
+      ( example: <!-- bla --> ) markers around the parts/pages you don't want
+      the web-app to use any longer. I give an example listing below. 
+      
+      . Line 341 to 408 can comment out
+      . line 611 to 691 can comment out
+ 
+ 4) now repackage ROOT.war incorporating your changes
+ 
+    o from your tmp_portal directory issue the following command
+ 
+      #> jar -cvf ROOT.war broker favicon.ico help portlets styles WEB-INF
+ 
+ 5) copy back to server and restart your "VMWare View Web Component" service.
+    
+    o Stop the "VMWare View Web Component" service 
+    o Remove ROOT.war and the ROOT directory from 
+     c -> Program Files -> VMWare -> VMWare View -> Server -> broker -> webapps
+    o Place your NEW ROOT.war file in the above directory
+    o Start the "VMWare View Web Component" service 
+ 
