@@ -13,28 +13,31 @@ Introduction
 ------------
 VMware does not provide the VDI implementer with a way to overwrite the default 
 web-page that is presented by the VMWare vdiconnect server when a user 
-navigates to the connect server with a 
-
-web browser. 
+navigates to the connect server with a web browser. 
 
 This did not fit our needs. 
 
-We required a redirect to our corporate with directions of what to download and
-how to get started. A "landing page" of sorts.
+We required a redirect to our main web site. There a user could find directions
+of what to download and how to get started. A "landing page" of sorts.
 
 
 Requirements
 ------------
 Familiarity with java webapps is required.
+Experience with the Tomcat container and the Maven build process is a plus.
 
 This project is built with Maven. http://maven.apache.org
 
 
 Building 
 --------
-Edit the page design to your requirements. 
+To make use of this overlay you will need to clone the source from github.
 
-  org/extreme/ppoverlay/PortalOverlayServlet.java 
+  git clone https://github.com/kevinfoote/xportal-overlay.git
+
+Edit the page design to meet your requirements. 
+
+  src/main/java/org/extreme/pppoverlay/PortalOverlayServlet.java 
 
 The PortalOverlayServlet.java file contains the output that is rendered when
 this overlay is invoked.
@@ -45,7 +48,8 @@ overlay into a jar file.
   mvn -DskipTests install 
 
 When this completes you will have a jar named xportal-overlay-1.0.jar in your 
-target directory.
+target directory. Follow the remaining directions to make use of your new jar
+overlay.
 
 
 Installing
@@ -66,5 +70,6 @@ any support for these modifications.
 
  ** USE THIS METHOD AT YOUR OWN RISK ** 
 
-I take no responsibility of mishaps that happen by using this method / software. You've been warned.
+I take no responsibility of mishaps that happen by using this method / software.
+You've been warned.
 
