@@ -64,9 +64,9 @@ Disclaimer
 The above outlined project is known to work on VMWare View 5.1 and 5.1.1. Tested
 and in production in our environment.
 
-I'm sure VMWare would condone any involvement with the modification of the 
-broker portal or any of its servlets. Additionally they will surely not offer 
-any support for these modifications.
+I'm sure VMWare would not approve of any involvement with the modification of 
+the broker portal or any of its servlets. Additionally they will surely not 
+offer any support for these modifications.
 
  ** USE THIS METHOD AT YOUR OWN RISK ** 
 
